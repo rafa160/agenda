@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--nome do modulo principal-->
+<html ng-app="agenda">
+<head>
+    <title>Agenda</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--    '[]' numero de modulos que quero importar-->
+    <script>
+        angular.module("agenda", []);
+        angular.module("agenda").controller("agendaCrtl", function ($scope) {
+          $scope.app = "Agenda";
+          $scope.contatos = [
+              {nome: "Rafael", telefone: "998124426", email: "rafa160"},
+              {nome: "teste1", telefone: "324423344", email: "teste2"},
+              {nome: "teste2", telefone: "988888888", email: "teste4"},
+              {nome: "teste3", telefone: "911221223", email: "teste3"}
+          ];
+          $scope.operadoras = [
+              {nome: "TIM"},
+              {nome: "VIVO"},
+              {nome: "OI"},
+              {nome: "CLARO"}
+          ];
+          $scope.adicionarContato = function (contato) {
+            $scope.contatos.push(angular.copy(contato));
+            delete $scope.contato;
+          };
+        });
+    </script>
+<style>
+        .jumbotron {
+           text-align: center;
+           margin-right: auto;
+           margin-left: auto;
+        }
+        /* Add a black background color to the top navigation */
+        .topnav {
+         background-color: #333;
+         overflow: hidden;
+        }
+
+/* Style the links inside the navigation bar */
+        .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        }
+
+/* Change the color of links on hover */
+        .topnav a:hover {
+         background-color: #ddd;
+         color: black;
+        }
+
+/* Add a color to the active/current link */
+       .topnav a.active {
+        background-color: #4CAF50;
+        color: white;
+        }
+        .form-control {
+        text-align: center;
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+
+        }
+        .btn {
+        margin-top: 20px;
+        width: 150px;
+        }
+
+</style>
+</head>
+<body ng-controller="agendaCrtl">
+<div class="topnav">
+    <a class="active" href="#home">Home</a>
+</div>
+<div class="jumbotron">
+
+<!--    recebe do $scope e mostra-->
+    <h4 ng-bind="app"></h4>
+    <table class="w3-table w3-striped w3-border">
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+        </tr>
+        <tr ng-repeat="contato in contatos">
+            <td>{{contato.nome}}</td>
+            <td>{{contato.telefone}}</td>
+            <td>{{contato.email}}</td>
+        </tr>
+    </table>
+    <hr/>
+    <input class="form-control" placeholder="Nome" type="text" ng-model="contato.nome" maxlength="40"/>
+    <input class="form-control" placeholder="Telefone" type="text" ng-model="contato.telefone" maxlength="9"/>
+    <input class="form-control" placeholder="E-mail" type="text" ng-model="contato.email" maxlength="30"/>
+    <select class="form-control" ng-model="contato.operadora" ng-options="operado.nome for operadora in operadoras">
+    </select>
+    <button class="btn btn-primary" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone || !contato.skype">Salvar</button>
+</div>
+<div class="jumbotron">
+    <button class="w3-button w3-green">Dia 1</button>
+    <button class="w3-button w3-green">Dia 2</button>
+    <button class="w3-button w3-green">Dia 3</button>
+    <button class="w3-button w3-green">Dia 4</button>
+    <button class="w3-button w3-green">Dia 5</button>
+    <button class="w3-button w3-green">Dia 6</button>
+    <button class="w3-button w3-green">Dia 7</button>
+    <button class="w3-button w3-green">Dia 8</button>
+    <button class="w3-button w3-green">Dia 9</button>
+</div>
+
+
+</body>
+</html>
