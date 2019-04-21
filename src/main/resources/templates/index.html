@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <!--nome do modulo principal-->
-<html ng-app="agenda">
+<html lang="pt" ng-app="agenda">
 <head>
+    <meta charset="UTF-8">
     <title>Agenda</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
@@ -15,32 +16,46 @@
         angular.module("agenda").controller("agendaCrtl", function ($scope) {
           $scope.app = "Agenda";
           $scope.contatos = [
-              {nome: "Rafael", telefone: "998124426", email: "rafa160"},
-              {nome: "teste1", telefone: "324423344", email: "teste2"},
-              {nome: "teste2", telefone: "988888888", email: "teste4"},
-              {nome: "teste3", telefone: "911221223", email: "teste3"}
+
           ];
           $scope.operadoras = [
-              {nome: "TIM"},
-              {nome: "VIVO"},
-              {nome: "OI"},
-              {nome: "CLARO"}
+              {nome: "TIM", categoria: "Celular"},
+              {nome: "VIVO", categoria: "Celular"},
+              {nome: "OI", categoria: "Celular"},
+              {nome: "CLARO", categoria: "Celular"},
+              {nome: "GVT", categoria: "Fixo"},
+              {nome: "EMBRATEL", categoria: "Fixo"}
           ];
           $scope.adicionarContato = function (contato) {
             $scope.contatos.push(angular.copy(contato));
             delete $scope.contato;
+            $scope.contatoForm.$setPristine();
+          };
+          $scope.apagarContato = function (contatos) {
+            $scope.contatos = contatos.filter(function (contato) {
+                if (!contato.selecionado)
+                  return contato;
+            });
+          };
+          $scope.isContatoSelecionado = function (contatos) {
+            return contatos.some( function (contato) {
+               return contato.selecionado;
+            });
           };
         });
+
+
     </script>
-<style>
+    <style>
         .jumbotron {
            text-align: center;
            margin-right: auto;
            margin-left: auto;
+           background-color: white;
         }
         /* Add a black background color to the top navigation */
         .topnav {
-         background-color: #333;
+         background-color: black;
          overflow: hidden;
         }
 
@@ -56,69 +71,107 @@
 
 /* Change the color of links on hover */
         .topnav a:hover {
-         background-color: #ddd;
-         color: black;
+           background-color: #ddd;
+           color: black;
         }
 
 /* Add a color to the active/current link */
        .topnav a.active {
-        background-color: #4CAF50;
-        color: white;
+           background-color: black;
+           color: white;
+           width: 141px;
         }
         .form-control {
-        text-align: center;
-        width: 400px;
-        margin-left: auto;
-        margin-right: auto;
+           text-align: center;
+           width: 400px;
+           margin-left: auto;
+           margin-right: auto;
 
         }
         .btn {
-        margin-top: 20px;
-        width: 150px;
+            margin-top: 20px;
+            width: 150px;
+        }
+        .w3-button {
+            width:150px;
+            height: 100px;
+            margin-top: 10px;
+        }
+        .alert {
+           margin-top: 10px;
+           width: 400px;
+           height: 45px;
+           text-align: center;
+           margin-left: auto;
+           margin-right: auto;
         }
 
-</style>
+
+    </style>
 </head>
 <body ng-controller="agendaCrtl">
 <div class="topnav">
     <a class="active" href="#home">Home</a>
+    <a class="active" href="#index">Agenda</a>
+    <a class="active" href="#tarefas">Tarefas</a>
 </div>
 <div class="jumbotron">
+    <!--    recebe do $scope e mostra-->
+    <div class="w3-container w3-black">
+        <h2 ng-bind="app"></h2>
+        <p>Adicione os contatos de seus amigos.</p>
+    </div>
 
-<!--    recebe do $scope e mostra-->
-    <h4 ng-bind="app"></h4>
+
     <table class="w3-table w3-striped w3-border">
         <tr>
+            <th></th>
             <th>Nome</th>
+            <th>Operadora</th>
             <th>Telefone</th>
             <th>Email</th>
         </tr>
         <tr ng-repeat="contato in contatos">
+            <td><input type="checkbox" ng-model="contato.selecionado"/></td>
             <td>{{contato.nome}}</td>
+            <td>{{contato.operadora.nome}}</td>
             <td>{{contato.telefone}}</td>
             <td>{{contato.email}}</td>
         </tr>
     </table>
     <hr/>
-    <input class="form-control" placeholder="Nome" type="text" ng-model="contato.nome" maxlength="40"/>
-    <input class="form-control" placeholder="Telefone" type="text" ng-model="contato.telefone" maxlength="9"/>
-    <input class="form-control" placeholder="E-mail" type="text" ng-model="contato.email" maxlength="30"/>
-    <select class="form-control" ng-model="contato.operadora" ng-options="operado.nome for operadora in operadoras">
-    </select>
-    <button class="btn btn-primary" ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone || !contato.skype">Salvar</button>
-</div>
-<div class="jumbotron">
-    <button class="w3-button w3-green">Dia 1</button>
-    <button class="w3-button w3-green">Dia 2</button>
-    <button class="w3-button w3-green">Dia 3</button>
-    <button class="w3-button w3-green">Dia 4</button>
-    <button class="w3-button w3-green">Dia 5</button>
-    <button class="w3-button w3-green">Dia 6</button>
-    <button class="w3-button w3-green">Dia 7</button>
-    <button class="w3-button w3-green">Dia 8</button>
-    <button class="w3-button w3-green">Dia 9</button>
-</div>
+    <form name="contatoForm">
+        <input class="form-control" placeholder="Nome" type="text" name="nome" ng-model="contato.nome" maxlength="40"
+               ng-required="true"/>
+        <input class="form-control" placeholder="Telefone" type="text" name="telefone" ng-model="contato.telefone"
+               maxlength="10" ng-required="true" ng-pattern="/^\d{5}-\d{4}$/"/>
+        <input class="form-control" placeholder="E-mail" type="text" name="email" ng-model="contato.email"
+               maxlength="30" ng-required="true"/>
+        <select class="form-control" ng-model="contato.operadora"
+                ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+            <option value="">Selecione uma Operadora</option>
+        </select>
+    </form>
+   
 
-
+    <div ng-show="contatoForm.nome.$invalid && contatoForm.nome.$dirty" class="alert alert-danger">
+        Por favor, preencha o nome.
+    </div>
+    <div ng-show="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty" class="alert alert-danger">
+        Por favor, preencha o telefone.
+    </div>
+    <div ng-show="contatoForm.telefone.$error.pattern" class="alert alert-danger">
+        O campo telefone deve ter o formato DDDDD-DDDD.
+    </div>
+    <div ng-show="contatoForm.email.$invalid && contatoForm.email.$dirty" class="alert alert-danger">
+        Por favor, preencha preencha seu e-mail.
+    </div>
+    <button class="btn btn-primary" ng-click="adicionarContato(contato)"
+            ng-disabled="contatoForm.$invalid">Salvar
+    </button>
+    <button class="btn btn-danger" ng-click="apagarContato(contatos)" ng-disabled="!isContatoSelecionado(contatos)">
+        Deletar
+    </button>
+</div>
 </body>
 </html>

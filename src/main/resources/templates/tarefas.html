@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html ng-app="agenda">
+<html lang="pt" ng-app="agenda">
 <head>
-    <meta charset="UTF-8">
-    <title>AGENDA</title>
     <title>Agenda</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
@@ -12,20 +10,13 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="static/css/teste.css" rel="stylesheet">
 </head>
-<body>
-<div id="topbar" class="topnav">
-    <a class="active" href="#home">Home</a>
-    <li><a href="#janeiro">Janeiro</a></li>
-    <a class="active" href="#janeiro.html">Fevereiro</a>
-    <a class="active" href="#janeiro.html">Março</a>
-    <a class="active" href="#janeiro.html">Abril</a>
-    <a class="active" href="#janeiro.html">Maio</a>
-    <a class="active" href="#janeiro.html">Junho</a>
-    <a class="active" href="#janeiro.html">Julho</a>
-    <a class="active" href="#janeiro.html">Agosto</a>
-    <a class="active" href="#janeiro.html">Setembro</a>
-</div>
+<body ng-controller="agendaCrtl">
 
+<div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a class="active" href="#agenda">Agenda</a>
+    <a class="active" href="#tarefas">Tarefa do Dia</a>
+</div>
 
 </body>
 </html>
