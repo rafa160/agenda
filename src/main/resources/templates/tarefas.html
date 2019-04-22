@@ -1,22 +1,160 @@
 <!DOCTYPE html>
-<html lang="pt" ng-app="agenda">
+<html lang="br" ng-app="agenda">
 <head>
-    <title>Agenda</title>
+    <meta charset="UTF-8">
+    <title>Tarefas</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link href="static/css/teste.css" rel="stylesheet">
+
+    <script>
+       angular.module("agenda", []);
+        angular.module("agenda").controller("agendaCrtl", function ($scope) {
+          $scope.app = "Agenda";
+          $scope.tarefas = [
+            {prioridade: {nivel: "High"},data: new Date(),  meses: {mes: "Fevereiro"}, descricao: "Testando aplicação."}
+
+          ];
+          $scope.adicionarTarefas = function () {
+
+          };
+          $scope.prioridade = [
+            {nivel: "High"},
+            {nivel: "Medium"},
+            {nivel: "Low"}
+          ];
+          $scope.meses = [
+            {mes: "Janeiro"},
+            {mes: "Fevereiro"},
+            {mes: "Março"},
+            {mes: "Abril"},
+            {mes: "Maio"},
+            {mes: "Junho"},
+            {mes: "Julho"},
+            {mes: "Agosto"},
+            {mes: "Setembro"},
+            {mes: "Outubro"},
+            {mes: "Novembro"},
+            {mes: "Dezembro"}
+          ];
+
+        });
+    </script>
+
+    <style>
+        .jumbotron {
+           text-align: center;
+           margin-right: auto;
+           margin-left: auto;
+           background-color: white;
+        }
+        /* Add a black background color to the top navigation */
+        .topnav {
+         background-color: LightSteelBlue;
+         overflow: hidden;
+        }
+
+ /* Style the links inside the navigation bar */
+        .topnav a {
+        float: left;
+        color: LightSteelBlue;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        }
+
+ /* Change the color of links on hover */
+        .topnav a:hover {
+           background-color: LightSteelBlue;
+           color: black;
+        }
+
+ /* Add a color to the active/current link */
+       .topnav a.active {
+           background-color: LightSteelBlue;
+           color: black;
+           width: 141px;
+        }
+        .form-control {
+           text-align: center;
+           width: 400px;
+           margin-left: auto;
+           margin-right: auto;
+
+        }
+        .btn {
+            margin-top: 20px;
+            width: 150px;
+        }
+        .w3-button {
+            width:150px;
+            height: 100px;
+            margin-top: 10px;
+        }
+        .alert {
+           margin-top: 10px;
+           width: 400px;
+           height: 45px;
+           text-align: center;
+           margin-left: auto;
+           margin-right: auto;
+        }
+        .w3-container {
+          background-color: LightSteelBlue;
+        }
+        .procurar {
+           width: 400px;
+           margin-top: 5px;
+           margin-left: 30px;
+           margin-top: auto;
+           border: 2px solid #ccc;
+           border-radius: 4px;
+           padding: 5px;
+           margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body ng-controller="agendaCrtl">
 
 <div class="topnav">
     <a class="active" href="#home">Home</a>
     <a class="active" href="#agenda">Agenda</a>
-    <a class="active" href="#tarefas">Tarefa do Dia</a>
+    <a class="active" href="#tarefas">Tarefas</a>
+</div>
+<div class="jumbotron">
+    <div class="w3-container">
+        <h2>Tarefas</h2>
+        <p>Adicione Suas Tarefas Do Dia a Dia</p>
+    </div>
 </div>
 
+ <form>
+     <input class="procurar" type="text" name="search" placeholder="O que está procurando?" ng-model="buscar ">
+ </form>
+
+ <table class="w3-table w3-striped w3-border">
+    <tr>
+        <th></th>
+        <th>Prioridade</th>
+        <th>Data de Criação</th>
+        <th>Mês</th>
+        <th>Descrição</th>
+    </tr>
+    <tr ng-repeat="tarefa in tarefas">
+        <td> <input type="checkbox" ng-model="tarefa.selecionada"/></td>
+        <td>{{tarefa.prioridade.nivel}}</td>
+        <td>{{tarefa.data | date:'dd/MM/yyyy HH:mm'}}</td>
+        <td>{{tarefa.meses.mes}}</td>
+        <td>{{tarefa.descricao}}</td>
+
+    </tr>
+ </table>
+<div>
+ <button class="btn btn-primary">Adicionar Lembrete</button>
+</div>
 </body>
 </html>

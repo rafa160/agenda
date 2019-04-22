@@ -55,14 +55,14 @@
         }
         /* Add a black background color to the top navigation */
         .topnav {
-         background-color: black;
+         background-color: LightSteelBlue;
          overflow: hidden;
         }
 
 /* Style the links inside the navigation bar */
         .topnav a {
         float: left;
-        color: #f2f2f2;
+        color: LightSteelBlue;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
@@ -71,14 +71,14 @@
 
 /* Change the color of links on hover */
         .topnav a:hover {
-           background-color: #ddd;
+           background-color: LightSteelBlue;
            color: black;
         }
 
 /* Add a color to the active/current link */
        .topnav a.active {
-           background-color: black;
-           color: white;
+           background-color: LightSteelBlue;
+           color: black;
            width: 141px;
         }
         .form-control {
@@ -105,6 +105,9 @@
            margin-left: auto;
            margin-right: auto;
         }
+        .w3-container {
+          background-color: LightSteelBlue;
+        }
 
 
     </style>
@@ -117,8 +120,8 @@
 </div>
 <div class="jumbotron">
     <!--    recebe do $scope e mostra-->
-    <div class="w3-container w3-black">
-        <h2 ng-bind="app"></h2>
+    <div class="w3-container">
+        <h2  ng-bind="app"></h2>
         <p>Adicione os contatos de seus amigos.</p>
     </div>
 
