@@ -15,10 +15,23 @@
         angular.module("agenda").controller("agendaCrtl", function ($scope) {
           $scope.app = "Agenda";
           $scope.tarefas = [
-            {prioridade: {nivel: "High"},data: new Date(),  meses: {mes: "Fevereiro"}, descricao: "Testando aplicação."}
+            {prioridade: {nivel: "High"},data: new Date(),  meses: {nome: "Fevereiro"}, descricao: "Ajustar tabela de preços e colocar botões."},
+            {prioridade: {nivel: "Low"},data: new Date(),  meses: {nome: "Dezembro"}, descricao: "Validar tela Login."},
+            {prioridade: {nivel: "Medium"},data: new Date(),  meses: {nome: "Fevereiro"}, descricao: "Configurar BD."},
+            {prioridade: {nivel: "Low"},data: new Date(),  meses: {nome: "Março"}, descricao: "Estudar para projeto inicial."},
+            {prioridade: {nivel: "Low"},data: new Date(),  meses: {nome: "Abril"}, descricao: "Configurar BD."},
+            {prioridade: {nivel: "Medium"},data: new Date(),  meses: {nome: "Dezembro"}, descricao: "Configurar BD 2."},
+            {prioridade: {nivel: "Medium"},data: new Date(),  meses: {nome: "Julho"}, descricao: "Configurar BD 4."},
+            {prioridade: {nivel: "High"},data: new Date(),  meses: {nome: "Dezembro"}, descricao: "Finalizar projeto."},
+            {prioridade: {nivel: "Low"},data: new Date(),  meses: {nome: "Julho"}, descricao: "Estudar Java."},
+            {prioridade: {nivel: "High"},data: new Date(),  meses: {nome: "Dezembro"}, descricao: "Prova da Faculdade."},
+            {prioridade: {nivel: "Medium"},data: new Date(),  meses: {nome: "Agosto"}, descricao: "Medico."},
+
 
           ];
-          $scope.adicionarTarefas = function () {
+          $scope.adicionarTarefas = function (tarefa) {
+             $scope.tarefas.push(angular.copy(tarefa));
+             delete $scope.tarefa;
 
           };
           $scope.prioridade = [
@@ -27,21 +40,37 @@
             {nivel: "Low"}
           ];
           $scope.meses = [
-            {mes: "Janeiro"},
-            {mes: "Fevereiro"},
-            {mes: "Março"},
-            {mes: "Abril"},
-            {mes: "Maio"},
-            {mes: "Junho"},
-            {mes: "Julho"},
-            {mes: "Agosto"},
-            {mes: "Setembro"},
-            {mes: "Outubro"},
-            {mes: "Novembro"},
-            {mes: "Dezembro"}
+            {nome: "Janeiro"},
+            {nome: "Fevereiro"},
+            {nome: "Março"},
+            {nome: "Abril"},
+            {nome: "Maio"},
+            {nome: "Junho"},
+            {nome: "Julho"},
+            {nome: "Agosto"},
+            {nome: "Setembro"},
+            {nome: "Outubro"},
+            {nome: "Novembro"},
+            {nome: "Dezembro"}
           ];
+          $scope.deletarTarefa = function (tarefas) {
+            $scope.tarefas = tarefas.filter (function (tarefa) {
+              if (!tarefa.selecionado)
+                return tarefa;
+            });
+          };
+          $scope.isTarefaSelecionado = function (tarefas) {
+            return tarefas.some( function (tarefa) {
+               return tarefa.selecionado;
+            });
+          };
+          $scope.ordenarPor = function (campo) {
+            $scope.ordenacao = campo;
+          };
 
         });
+
+
     </script>
 
     <style>
@@ -84,6 +113,7 @@
            width: 400px;
            margin-left: auto;
            margin-right: auto;
+           margin-top: 20px;
 
         }
         .btn {
@@ -116,6 +146,21 @@
            padding: 5px;
            margin-bottom: 10px;
         }
+        .textarea {
+           margin-top: 20px;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+           box-sizing: border-box;
+           width: 100%;
+}
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body ng-controller="agendaCrtl">
@@ -132,29 +177,53 @@
     </div>
 </div>
 
- <form>
-     <input class="procurar" type="text" name="search" placeholder="O que está procurando?" ng-model="buscar ">
- </form>
+<form>
+    <input class="procurar" type="text" name="search" placeholder="O que está procurando?" ng-model="buscar">
+</form>
+<div style="overflow: auto; width: auto; height: 200px;">
+    <table class="w3-table w3-striped w3-border">
+        <tr>
+            <th></th>
+            <th><a href=""ng-click="ordenarPor('prioridade')">Prioridade</a></th>
+            <th>Data de Criação</th>
+            <th><a href="" ng-click="ordenarPor('meses')">Mês</a></th>
+            <th>Descrição</th>
+        </tr>
+        <tr ng-repeat="tarefa in tarefas | filter: buscar | orderBy: ordenacao">
+            <td><input type="checkbox" ng-model="tarefa.selecionado"/></td>
+            <td>{{tarefa.prioridade.nivel}}</td>
+            <td>{{tarefa.data | date:'dd/MM/yyyy HH:mm'}}</td>
+            <td>{{tarefa.meses.nome}}</td>
+            <td>{{tarefa.descricao}}</td>
 
- <table class="w3-table w3-striped w3-border">
-    <tr>
-        <th></th>
-        <th>Prioridade</th>
-        <th>Data de Criação</th>
-        <th>Mês</th>
-        <th>Descrição</th>
-    </tr>
-    <tr ng-repeat="tarefa in tarefas">
-        <td> <input type="checkbox" ng-model="tarefa.selecionada"/></td>
-        <td>{{tarefa.prioridade.nivel}}</td>
-        <td>{{tarefa.data | date:'dd/MM/yyyy HH:mm'}}</td>
-        <td>{{tarefa.meses.mes}}</td>
-        <td>{{tarefa.descricao}}</td>
-
-    </tr>
- </table>
-<div>
- <button class="btn btn-primary">Adicionar Lembrete</button>
+        </tr>
+    </table>
 </div>
+<form name="tarefaForm">
+    <div class="jumbotron">
+        <select class="form-control" ng-model="tarefa.prioridade"
+                ng-options="prioridade.nivel for prioridade in prioridade" ng-required="true">
+            <option value="">Informe Prioridade</option>
+        </select>
+        <select class="form-control" ng-model="tarefa.meses" ng-options="meses.nome for meses in meses"
+                ng-required="true">
+            <option value="">Informe o Mês da Tarefa</option>
+        </select>
+        <!--    problema no textarea-->
+        <textarea class="form-control" type="text" placeholder="Descrição" ng-model="tarefa.descricao"
+                  ng-required="true" ng-minlength="10" ng-pattern=""></textarea>
+        <button class="btn btn-primary" ng-click="adicionarTarefas(tarefa)" ng-disabled="tarefaForm.$invalid">Adicionar
+            Lembrete
+        </button>
+        <button class="btn btn-danger" ng-click="deletarTarefa(tarefas)" ng-disabled="!isTarefaSelecionado(tarefas)">
+            Deletar Tarefa
+        </button>
+    </div>
+</form>
+<!--ainda nao está sendo chamado-->
+<div ng-show="tarefaForm.descricao.$error.minlength" class="alert alert-danger">
+    Seja um pouco mais específico, por favor.
+</div>
+
 </body>
 </html>
