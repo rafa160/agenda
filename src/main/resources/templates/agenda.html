@@ -1,0 +1,56 @@
+
+
+<div class="jumbotron">
+    <!--    recebe do $scope e mostra-->
+    <div class="w3-container">
+        <h2>Agenda</h2>
+        <p>Adicione os contatos de seus amigos.</p>
+    </div>
+    <table class="w3-table w3-striped w3-border">
+        <tr>
+            <th></th>
+            <th>Nome</th>
+            <th>Operadora</th>
+            <th>Telefone</th>
+            <th>Email</th>
+        </tr>
+        <tr ng-repeat="contato in contatos">
+            <td><input type="checkbox" ng-model="contato.selecionado"/></td>
+            <td>{{contato.nome}}</td>
+            <td>{{contato.operadora.nome}}</td>
+            <td>{{contato.telefone}}</td>
+            <td>{{contato.email}}</td>
+        </tr>
+    </table>
+    <hr/>
+    <form name="contatoForm">
+        <input class="form-control" placeholder="Nome" type="text" name="nome" ng-model="contato.nome" maxlength="40"
+               ng-required="true"/>
+        <input class="form-control" placeholder="Telefone" type="text" name="telefone" ng-model="contato.telefone"
+               maxlength="10" ng-required="true" ng-pattern="/^\d{5}-\d{4}$/"/>
+        <input class="form-control" placeholder="E-mail" type="text" name="email" ng-model="contato.email"
+               maxlength="30" ng-required="true"/>
+        <select class="form-control" ng-model="contato.operadora"
+                ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
+            <option value="">Selecione uma Operadora</option>
+        </select>
+    </form>
+    <div ng-show="contatoForm.nome.$invalid && contatoForm.nome.$dirty" class="alert alert-danger">
+        Por favor, preencha o nome.
+    </div>
+    <div ng-show="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty" class="alert alert-danger">
+        Por favor, preencha o telefone.
+    </div>
+    <div ng-show="contatoForm.telefone.$error.pattern" class="alert alert-danger">
+        O campo telefone deve ter o formato DDDDD-DDDD.
+    </div>
+    <div ng-show="contatoForm.email.$invalid && contatoForm.email.$dirty" class="alert alert-danger">
+        Por favor, preencha preencha seu e-mail.
+    </div>
+    <button class="btn btn-primary" ng-click="adicionarContato(contato)"
+            ng-disabled="contatoForm.$invalid">Salvar
+    </button>
+    <button class="btn btn-danger" ng-click="apagarContato(contatos)" ng-disabled="!isContatoSelecionado(contatos)">
+        Deletar
+    </button>
+</div>

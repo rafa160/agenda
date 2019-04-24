@@ -4,44 +4,16 @@
     <meta charset="UTF-8">
     <title>Agenda</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular-route.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="js/agendaCtrl.js"></script>
-    <script>
-        angular.module("agenda", []);
-        angular.module("agenda").controller("agendaCrtl", function ($scope) {
-          $scope.app = "Agenda";
-          $scope.contatos = [
+    <script src="../static/js/application.js"></script>
+    <script src="../static/app/controllers/agendaCtrl.js"></script>
+    <script src="../static/app/controllers/tarefaCtrl.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/teste.css" >
 
-          ];
-          $scope.operadoras = [
-              {nome: "TIM", categoria: "Celular"},
-              {nome: "VIVO", categoria: "Celular"},
-              {nome: "OI", categoria: "Celular"},
-              {nome: "CLARO", categoria: "Celular"},
-              {nome: "GVT", categoria: "Fixo"},
-              {nome: "EMBRATEL", categoria: "Fixo"}
-          ];
-          $scope.adicionarContato = function (contato) {
-            $scope.contatos.push(angular.copy(contato));
-            delete $scope.contato;
-            $scope.contatoForm.$setPristine();
-          };
-          $scope.apagarContato = function (contatos) {
-            $scope.contatos = contatos.filter(function (contato) {
-                if (!contato.selecionado)
-                  return contato;
-            });
-          };
-          $scope.isContatoSelecionado = function (contatos) {
-            return contatos.some( function (contato) {
-               return contato.selecionado;
-            });
-          };
-        });
-    </script>
     <style>
         .jumbotron {
            text-align: center;
@@ -98,66 +70,16 @@
         }
     </style>
 </head>
-<body ng-controller="agendaCrtl">
+<body>
 <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a class="active" href="#index">Agenda</a>
-    <a class="active" href="#tarefas">Tarefas</a>
+    <a class="active" href="#!/home">Home</a>
+    <a class="active" href="#!/agenda">Agenda</a>
+    <a class="active" href="#!/tarefas">Tarefas</a>
 </div>
-<div class="jumbotron">
-    <!--    recebe do $scope e mostra-->
-    <div class="w3-container">
-        <h2 ng-bind="app"></h2>
-        <p>Adicione os contatos de seus amigos.</p>
-    </div>
-    <table class="w3-table w3-striped w3-border">
-        <tr>
-            <th></th>
-            <th>Nome</th>
-            <th>Operadora</th>
-            <th>Telefone</th>
-            <th>Email</th>
-        </tr>
-        <tr ng-repeat="contato in contatos">
-            <td><input type="checkbox" ng-model="contato.selecionado"/></td>
-            <td>{{contato.nome}}</td>
-            <td>{{contato.operadora.nome}}</td>
-            <td>{{contato.telefone}}</td>
-            <td>{{contato.email}}</td>
-        </tr>
-    </table>
-    <hr/>
-    <form name="contatoForm">
-        <input class="form-control" placeholder="Nome" type="text" name="nome" ng-model="contato.nome" maxlength="40"
-               ng-required="true"/>
-        <input class="form-control" placeholder="Telefone" type="text" name="telefone" ng-model="contato.telefone"
-               maxlength="10" ng-required="true" ng-pattern="/^\d{5}-\d{4}$/"/>
-        <input class="form-control" placeholder="E-mail" type="text" name="email" ng-model="contato.email"
-               maxlength="30" ng-required="true"/>
-        <select class="form-control" ng-model="contato.operadora"
-                ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
-            <option value="">Selecione uma Operadora</option>
-        </select>
-    </form>
-    <div ng-show="contatoForm.nome.$invalid && contatoForm.nome.$dirty" class="alert alert-danger">
-        Por favor, preencha o nome.
-    </div>
-    <div ng-show="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty" class="alert alert-danger">
-        Por favor, preencha o telefone.
-    </div>
-    <div ng-show="contatoForm.telefone.$error.pattern" class="alert alert-danger">
-        O campo telefone deve ter o formato DDDDD-DDDD.
-    </div>
-    <div ng-show="contatoForm.email.$invalid && contatoForm.email.$dirty" class="alert alert-danger">
-        Por favor, preencha preencha seu e-mail.
-    </div>
-    <button class="btn btn-primary" ng-click="adicionarContato(contato)"
-            ng-disabled="contatoForm.$invalid">Salvar
-    </button>
-    <button class="btn btn-danger" ng-click="apagarContato(contatos)" ng-disabled="!isContatoSelecionado(contatos)">
-        Deletar
-    </button>
+<!-- n-view marca onde o template vai ser aplicado -->
+<div id="conteudo" ng-view>
+    <!-- MINHA PAGINA -->
+</div>
 
-</div>
 </body>
 </html>

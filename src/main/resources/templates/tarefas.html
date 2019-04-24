@@ -3,75 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Tarefas</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-    <script>
-       angular.module("agenda", []);
-        angular.module("agenda").controller("agendaCrtl", function ($scope) {
-          $scope.app = "Agenda";
-          $scope.tarefas = [
-            {prioridade: {nivel: "High"},data: new Date(),  meses: {nome: "Fevereiro"}, descricao: "Ajustar tabela de preços e colocar botões."},
-            {prioridade: {nivel: "Low"},data: new Date(),  meses: {nome: "Dezembro"}, descricao: "Validar tela Login."},
-            {prioridade: {nivel: "Medium"},data: new Date(),  meses: {nome: "Fevereiro"}, descricao: "Configurar BD."},
-            {prioridade: {nivel: "Low"},data: new Date(),  meses: {nome: "Março"}, descricao: "Estudar para projeto inicial."},
-            {prioridade: {nivel: "Low"},data: new Date(),  meses: {nome: "Abril"}, descricao: "Configurar BD."},
-            {prioridade: {nivel: "Medium"},data: new Date(),  meses: {nome: "Dezembro"}, descricao: "Configurar BD 2."},
-            {prioridade: {nivel: "Medium"},data: new Date(),  meses: {nome: "Julho"}, descricao: "Configurar BD 4."},
-            {prioridade: {nivel: "High"},data: new Date(),  meses: {nome: "Dezembro"}, descricao: "Finalizar projeto."},
-            {prioridade: {nivel: "Low"},data: new Date(),  meses: {nome: "Julho"}, descricao: "Estudar Java."},
-            {prioridade: {nivel: "High"},data: new Date(),  meses: {nome: "Dezembro"}, descricao: "Prova da Faculdade."},
-            {prioridade: {nivel: "Medium"},data: new Date(),  meses: {nome: "Agosto"}, descricao: "Medico."},
-
-
-          ];
-          $scope.adicionarTarefas = function (tarefa) {
-             $scope.tarefas.push(angular.copy(tarefa));
-             delete $scope.tarefa;
-
-          };
-          $scope.prioridade = [
-            {nivel: "High"},
-            {nivel: "Medium"},
-            {nivel: "Low"}
-          ];
-          $scope.meses = [
-            {nome: "Janeiro"},
-            {nome: "Fevereiro"},
-            {nome: "Março"},
-            {nome: "Abril"},
-            {nome: "Maio"},
-            {nome: "Junho"},
-            {nome: "Julho"},
-            {nome: "Agosto"},
-            {nome: "Setembro"},
-            {nome: "Outubro"},
-            {nome: "Novembro"},
-            {nome: "Dezembro"}
-          ];
-          $scope.deletarTarefa = function (tarefas) {
-            $scope.tarefas = tarefas.filter (function (tarefa) {
-              if (!tarefa.selecionado)
-                return tarefa;
-            });
-          };
-          $scope.isTarefaSelecionado = function (tarefas) {
-            return tarefas.some( function (tarefa) {
-               return tarefa.selecionado;
-            });
-          };
-          $scope.ordenarPor = function (campo) {
-            $scope.ordenacao = campo;
-          };
-
-        });
-
-
-    </script>
 
     <style>
         .jumbotron {
@@ -163,13 +94,8 @@
 
     </style>
 </head>
-<body ng-controller="agendaCrtl">
 
-<div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a class="active" href="#agenda">Agenda</a>
-    <a class="active" href="#tarefas">Tarefas</a>
-</div>
+
 <div class="jumbotron">
     <div class="w3-container">
         <h2>Tarefas</h2>
@@ -225,6 +151,3 @@
 <div ng-show="tarefaForm.descricao.$error.minlength" class="alert alert-danger">
     Seja um pouco mais específico, por favor.
 </div>
-
-</body>
-</html>

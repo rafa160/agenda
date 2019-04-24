@@ -1,5 +1,5 @@
-        angular.module("agenda", []);
-        angular.module("agenda").controller("agendaCrtl", function ($scope) {
+
+        angular.module("agenda").controller("agendaCtrl", function ($scope) {
           $scope.app = "Agenda";
           $scope.contatos = [
 
