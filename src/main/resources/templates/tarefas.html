@@ -189,7 +189,8 @@
             <th><a href="" ng-click="ordenarPor('meses')">Mês</a></th>
             <th>Descrição</th>
         </tr>
-        <tr ng-repeat="tarefa in tarefas | filter: buscar | orderBy: ordenacao">
+<!--        orderBy não esta sendo chamado (need fix it)-->
+        <tr ng-repeat="tarefa in tarefas | filter: buscar | orderBy: ordenacao:true">
             <td><input type="checkbox" ng-model="tarefa.selecionado"/></td>
             <td>{{tarefa.prioridade.nivel}}</td>
             <td>{{tarefa.data | date:'dd/MM/yyyy HH:mm'}}</td>
