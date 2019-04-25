@@ -9,66 +9,10 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="../static/js/application.js"></script>
+    <script src="../static/app/application.js"></script>
     <script src="../static/app/controllers/agendaCtrl.js"></script>
     <script src="../static/app/controllers/tarefaCtrl.js"></script>
     <link rel="stylesheet" type="text/css" href="../static/css/teste.css" >
-
-    <style>
-        .jumbotron {
-           text-align: center;
-           margin-right: auto;
-           margin-left: auto;
-           background-color: white;
-        }
-        .topnav {
-         background-color: LightSteelBlue;
-         overflow: hidden;
-        }
-        .topnav a {
-        float: left;
-        color: LightSteelBlue;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-        }
-        .topnav a:hover {
-           background-color: LightSteelBlue;
-           color: black;
-        }
-       .topnav a.active {
-           background-color: LightSteelBlue;
-           color: black;
-           width: 141px;
-        }
-        .form-control {
-           text-align: center;
-           width: 400px;
-           margin-left: auto;
-           margin-right: auto;
-        }
-        .btn {
-            margin-top: 20px;
-            width: 150px;
-        }
-        .w3-button {
-            width:150px;
-            height: 100px;
-            margin-top: 10px;
-        }
-        .alert {
-           margin-top: 10px;
-           width: 400px;
-           height: 45px;
-           text-align: center;
-           margin-left: auto;
-           margin-right: auto;
-        }
-        .w3-container {
-          background-color: LightSteelBlue;
-        }
-    </style>
 </head>
 <body>
 <div class="topnav">
@@ -80,6 +24,9 @@
 <div id="conteudo" ng-view>
     <!-- MINHA PAGINA -->
 </div>
+</br>
+</br>
+<div ng-include='"footer.html"'/>
 
 </body>
 </html>
