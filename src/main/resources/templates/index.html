@@ -15,11 +15,9 @@
     <link rel="stylesheet" type="text/css" href="../static/css/teste.css" >
 </head>
 <body>
-<div class="topnav">
-    <a class="active" href="#!/home">Home</a>
-    <a class="active" href="#!/agenda">Agenda</a>
-    <a class="active" href="#!/tarefas">Tarefas</a>
-</div>
+
+<div ng-include='"header.html"'></div>
+
 <!-- n-view marca onde o template vai ser aplicado -->
 <div id="conteudo" ng-view>
     <!-- MINHA PAGINA -->

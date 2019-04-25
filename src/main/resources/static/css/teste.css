@@ -10,7 +10,7 @@
         }
         .topnav a {
         float: left;
-        color: LightSteelBlue;
+        color: black;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
@@ -19,6 +19,7 @@
         .topnav a:hover {
            background-color: LightSteelBlue;
            color: black;
+           border: 1px solid  black;
         }
        .topnav a.active {
            background-color: LightSteelBlue;
@@ -76,4 +77,15 @@
            border-radius: 4px;
            padding: 5px;
            margin-bottom: 10px;
+        }
+        .button {
+          background-color: LightSteelBlue; /* Green */
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          cursor: pointer;
+          float: left;
         }
