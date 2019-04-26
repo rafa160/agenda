@@ -14,13 +14,10 @@ angular.module("agenda").controller("tarefaCtrl", function ($scope) {
             {prioridade: {nivel: "Low"},data: new Date(),  meses: {nome: "Julho"}, descricao: "Estudar Java."},
             {prioridade: {nivel: "High"},data: new Date(),  meses: {nome: "Dezembro"}, descricao: "Prova da Faculdade."},
             {prioridade: {nivel: "Medium"},data: new Date(),  meses: {nome: "Agosto"}, descricao: "Medico."},
-
-
           ];
           $scope.adicionarTarefas = function (tarefa) {
              $scope.tarefas.push(angular.copy(tarefa));
              delete $scope.tarefa;
-
           };
           $scope.prioridade = [
             {nivel: "High"},
@@ -52,9 +49,8 @@ angular.module("agenda").controller("tarefaCtrl", function ($scope) {
                return tarefa.selecionado;
             });
           };
-          $scope.ordenarPor = function (campo) {
-            $scope.ordenacao = campo;
+          $scope.ordenarPor = function (nome) {
+            $scope.ordenacao = nome;
           };
-
         });
 

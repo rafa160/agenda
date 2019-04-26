@@ -18,10 +18,10 @@
             <th>Descrição</th>
         </tr>
 <!--        orderBy não esta sendo chamado (need fix it)-->
-        <tr ng-repeat="tarefa in tarefas | filter: buscar | orderBy: ordenacao:true">
+        <tr ng-repeat="tarefa in tarefas | filter: buscar | orderBy: ordenacao">
             <td><input type="checkbox" ng-model="tarefa.selecionado"/></td>
             <td>{{tarefa.prioridade.nivel}}</td>
-            <td>{{tarefa.data | date:'dd/MM/yyyy HH:mm'}}</td>
+            <td>{{tarefa.data | date:'dd/MM/yyyy'}}</td>
             <td>{{tarefa.meses.nome}}</td>
             <td id="descricao">{{tarefa.descricao}}</td>
 
@@ -34,11 +34,12 @@
                 ng-options="prioridade.nivel for prioridade in prioridade" ng-required="true">
             <option value="">Informe Prioridade</option>
         </select>
-        <select class="form-control" ng-model="tarefa.meses" ng-options="meses.nome for meses in meses"
+        <input class="form-control" type="date" ng-model="tarefa.data">
+        <select class="form-control"  ng-model="tarefa.meses" ng-options="meses.nome for meses in meses"
                 ng-required="true">
             <option value="">Informe o Mês da Tarefa</option>
         </select>
-        <!--    problema no textarea-->
+        <!--    problema no textarea com quebra de linha-->
         <textarea class="form-control" type="text" placeholder="Descrição" ng-model="tarefa.descricao"
                   ng-required="true" ng-minlength="10" ng-pattern=""></textarea>
         <button class="btn btn-primary" ng-click="adicionarTarefas(tarefa)" ng-disabled="tarefaForm.$invalid">Adicionar
@@ -49,6 +50,8 @@
         </button>
     </div>
 </form>
+</br>
+</br>
 <!--ainda nao está sendo chamado-->
 <div ng-show="tarefaForm.descricao.$error.minlength" class="alert alert-danger">
     Seja um pouco mais específico, por favor.
