@@ -23,6 +23,7 @@
     </table>
     <hr/>
     <form name="contatoForm">
+<!--        ng-model vai mostrar o que foi informado pelo usuario-->
         <input class="form-control" placeholder="Nome" type="text" name="nome" ng-model="contato.nome" maxlength="40"
                ng-required="true"/>
         <input class="form-control" placeholder="Telefone" type="text" name="telefone" ng-model="contato.telefone"
@@ -34,6 +35,7 @@
             <option value="">Selecione uma Operadora</option>
         </select>
     </form>
+<!--    dirty informa um erro caso o input seja apagado-->
     <div ng-show="contatoForm.nome.$invalid && contatoForm.nome.$dirty" class="alert alert-danger">
         Por favor, preencha o nome.
     </div>

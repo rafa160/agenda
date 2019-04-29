@@ -1,5 +1,3 @@
-
-
 angular.module("agenda").controller("tarefaCtrl", function ($scope) {
           $scope.app = "Agenda";
           $scope.tarefas = [
