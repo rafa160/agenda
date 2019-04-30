@@ -16,6 +16,7 @@ angular.module("agenda").config(['$routeProvider', function($routeProvider) {
            templateUrl: "contas.html"
       })
       .when("/janeiro", {
-          templateUrl:"custoMeses/janeiro.html"
+          templateUrl:"custoMeses/janeiro.html",
+          controller: "mesCtrl"
       });
  }]);

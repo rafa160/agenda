@@ -1,5 +1,6 @@
 angular.module("agenda").controller("agendaCtrl", function ($scope, $http) {
   $scope.app = "Agenda";
+   $scope.contatos =[];
     $scope.operadoras = [
       {nome: "TIM", categoria: "Celular"},
       {nome: "VIVO", categoria: "Celular"},
@@ -8,12 +9,12 @@ angular.module("agenda").controller("agendaCtrl", function ($scope, $http) {
       {nome: "GVT", categoria: "Fixo"},
       {nome: "EMBRATEL", categoria: "Fixo"}
     ];
-    var mostrarContatos = function (){
-        $http.get("http://localhost:3214/contatos").success(function(nome){
-        $scope.contatos = nome;
-        });
-
-    };
+//    var mostrarContatos = function (){
+//        $http.get("http://localhost:3214/contatos").success(function(nome){
+//        $scope.contatos = nome;
+//        });
+//
+//    };
     $scope.adicionarContato = function (contato) {
        $scope.contatos.push(angular.copy(contato));
        delete $scope.contato;
@@ -30,5 +31,4 @@ angular.module("agenda").controller("agendaCtrl", function ($scope, $http) {
           return contato.selecionado;
        });
     };
-    {{mostrarContatos}}
   });
